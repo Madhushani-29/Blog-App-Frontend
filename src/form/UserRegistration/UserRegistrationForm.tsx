@@ -12,17 +12,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import PasswordInputField from "./PasswordInputField";
 
 const registrationFormSchema = z.object({
-    firstName: z.string().min(1, {message:"First name is required"}),
-    lastName: z.string().min(1, {message:"Last name is required"}),
-    email: z.string().email({message:"This is not a valid email."}),
-    //password: z.string().min(6, {message:"Password must contain at least 6 characters"}),
-    //confirm: z.string(),
-})/*.refine((data) => data.password === data.confirm, {
+    firstName: z.string().min(1, { message: "First name is required" }),
+    lastName: z.string().min(1, { message: "Last name is required" }),
+    email: z.string().email({ message: "This is not a valid email." }),
+    password: z.string().min(6, { message: "Password must contain at least 6 characters" }),
+    confirm: z.string(),
+}).refine((data) => data.password === data.confirm, {
     message: "Passwords don't match",
     path: ["confirm"],
-})*/;
+});
 
 export type UserRegisterFormData = z.infer<typeof registrationFormSchema>;
 
@@ -50,7 +51,7 @@ const UserRegistrationForm = ({
                 <div>
                     <h2 className="text-2xl font-bold">{title}</h2>
                     <FormDescription>
-                        View and change your profile information here
+                        Give your details to register here.
                     </FormDescription>
                 </div>
                 <FormField
@@ -86,13 +87,15 @@ const UserRegistrationForm = ({
                         <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input {...field} className="bg-white" />
+                                <Input {...field} type="password" className="bg-white" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="bg-orange-500">
+                <PasswordInputField FieldName="password" label="Password"/>
+                <PasswordInputField FieldName="confirm" label="Confirm Password"/>
+                <Button type="submit" className="bg-teal-700">
                     {buttonText}
                 </Button>
             </form>

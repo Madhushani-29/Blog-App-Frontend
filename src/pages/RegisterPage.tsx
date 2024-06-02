@@ -1,4 +1,4 @@
-import UserRegistrationForm, { UserRegisterFormData } from "@/form/UserRegistrationForm"
+import UserRegistrationForm, { UserRegisterFormData } from "@/form/UserRegistration/UserRegistrationForm"
 
 const RegisterPage = () => {
     const userRegistration=(userRegistrationData: UserRegisterFormData)=>{
@@ -6,8 +6,8 @@ const RegisterPage = () => {
     }
 
   return (
-    <UserRegistrationForm onSave={userRegistration} title="Register" buttonText="Register"/>
+    <UserRegistrationForm onSave={userRegistration} title="Registration" buttonText="Register"/>
   )
 }
 
-export default RegisterPage
+export default RegisterPage;

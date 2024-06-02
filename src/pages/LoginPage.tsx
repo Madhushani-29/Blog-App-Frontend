@@ -1,6 +1,12 @@
+import UserLoginForm, { UserLoginFormData } from "@/form/UserRegistration/UserLoginFrom"
+
 const LoginPage = () => {
+  const userLogin=(userLoginData: UserLoginFormData)=>{
+    console.log(userLoginData);
+}
+
   return (
-    <div>LoginPage</div>
+    <UserLoginForm onSave={userLogin} buttonText="Login" title="Login"/>
   )
 }
 
