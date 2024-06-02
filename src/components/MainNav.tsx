@@ -1,8 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import UsernameMenu from "./UsernameMenu";
 
 const MainNav = () => {
-    const isAuthenticated  = false;
+    
+    const navigate = useNavigate();
+    
+    const isAuthenticated = false;
+
+    const navigateLoginPage = () => {
+        navigate("/login");
+    }
+
     return (
         <span>
             {isAuthenticated ? (
@@ -13,7 +22,7 @@ const MainNav = () => {
                 <Button
                     variant="ghost"
                     className="font-bold hover:text-teal-700 hover:bg-white"
-                    onClick={async () => {}}>
+                    onClick={navigateLoginPage}>
                     Log In
                 </Button>
             )}

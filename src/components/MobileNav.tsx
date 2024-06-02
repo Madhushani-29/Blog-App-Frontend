@@ -3,9 +3,17 @@ import { CircleUserRound, Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import MobileNavLinks from './MobileNavLinks';
+import { useNavigate } from 'react-router-dom';
 
 const MobileNav = () => {
-    const isAuthenticated= false;
+    const navigate = useNavigate();
+
+    const isAuthenticated = false;
+
+    const navigateLoginPage = () => {
+        navigate("/login");
+    }
+
     return (
         <Sheet>
             <SheetTrigger>
@@ -28,7 +36,7 @@ const MobileNav = () => {
                         <MobileNavLinks />
                     ) : (
                         <Button
-                            onClick={() => {}}
+                            onClick={navigateLoginPage}
                             className="flex-1 font-bold bg-teal-700"
                         >
                             Log In
