@@ -35,7 +35,9 @@ const PasswordInputField = ({ FieldName, label }: Props) => {
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
                                 className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600"
-                            > {showPassword ? <Eye /> : <EyeOff />}
+                            > {showPassword ?
+                                <Eye className="text-teal-700" />
+                                : <EyeOff className="text-teal-700"/>}
                             </button>
                         </div>
                     </FormControl>
