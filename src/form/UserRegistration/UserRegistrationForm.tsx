@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import PasswordInputField from "./PasswordInputField";
+import { Link } from "react-router-dom";
 
 const registrationFormSchema = z.object({
     firstName: z.string().min(1, { message: "First name is required" }),
@@ -93,11 +94,15 @@ const UserRegistrationForm = ({
                         </FormItem>
                     )}
                 />
-                <PasswordInputField FieldName="password" label="Password"/>
-                <PasswordInputField FieldName="confirm" label="Confirm Password"/>
+                <PasswordInputField FieldName="password" label="Password" />
+                <PasswordInputField FieldName="confirm" label="Confirm Password" />
                 <Button type="submit" className="bg-teal-700">
                     {buttonText}
                 </Button>
+                <div className="flex">
+                    <p>If you are already registered,</p>
+                    <Link to="/login" className="pl-2 font-bold text-teal-700">Login</Link>
+                </div>
             </form>
         </Form>
     );
