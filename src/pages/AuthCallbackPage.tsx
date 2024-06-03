@@ -22,7 +22,7 @@ const AuthCallbackPage = () => {
             hasCreatedUser.current = true;
         }
         navigate("/login");
-    }, []);
+    }, [createUser, location.search, navigate, user]);
 
     return (
         <>Loading...</>

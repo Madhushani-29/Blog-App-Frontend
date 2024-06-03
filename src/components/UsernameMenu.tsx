@@ -31,14 +31,8 @@ const UsernameMenu = ({logout}:Props) => {
                 </DropdownMenuItem>
                 <Separator />
                 <DropdownMenuItem>
-                    <Link to="/manage-restaurant" className="font-bold hover:text-teal-700">
-                        Manage Restaurant
-                    </Link>
-                </DropdownMenuItem>
-                <Separator />
-                <DropdownMenuItem>
-                    <Link to="/order-status" className="font-bold hover:text-teal-700">
-                        Order Status
+                    <Link to="/my-posts" className="font-bold hover:text-teal-700">
+                        My Posts
                     </Link>
                 </DropdownMenuItem>
                 <Separator />

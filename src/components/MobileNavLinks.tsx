@@ -14,16 +14,10 @@ const MobileNavLinks = ({logout}:Props) => {
                 User Profile
             </Link>
             <Link
-                to="/manage-restaurant"
+                to="/my-posts"
                 className="flex bg-white items-center font-bold hover:text-teal-700"
             >
-                Manage Restaurant
-            </Link>
-            <Link
-                to="/order-status"
-                className="flex bg-white items-center font-bold hover:text-teal-700"
-            >
-                Order Status
+                My Posts
             </Link>
             <Button
                 onClick={logout}
