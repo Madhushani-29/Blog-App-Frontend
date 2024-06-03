@@ -1,22 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import UsernameMenu from "./UsernameMenu";
+import { auth } from "@/config/firebase-config";
 
 const MainNav = () => {
-    
     const navigate = useNavigate();
-    
-    const isAuthenticated = false;
+    const user = auth.currentUser;
 
     const navigateLoginPage = () => {
         navigate("/login");
     }
 
+    const logout=()=>{
+        auth.signOut();
+        navigateLoginPage();
+    }
+
     return (
         <span>
-            {isAuthenticated ? (
+            {user ? (
                 <>
-                    <UsernameMenu />
+                    <UsernameMenu logout={logout}/>
                 </>
             ) : (
                 <Button

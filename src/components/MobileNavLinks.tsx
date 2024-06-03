@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
+type Props={
+    logout:()=>void;
+}
 
-const MobileNavLinks = () => {
+const MobileNavLinks = ({logout}:Props) => {
     return (
         <>
             <Link
@@ -23,7 +26,7 @@ const MobileNavLinks = () => {
                 Order Status
             </Link>
             <Button
-                onClick={() => {console.log("Log out")}}
+                onClick={logout}
                 className="flex items-center px-3 font-bold hover:bg-gray-500"
             >
                 Log Out

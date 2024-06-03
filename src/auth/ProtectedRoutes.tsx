@@ -1,18 +1,33 @@
-import { useAuth0 } from '@auth0/auth0-react'
+import { useState, useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/config/firebase-config';
 
 const ProtectedRoutes = () => {
-    const { isAuthenticated, isLoading } = useAuth0();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    //if the user is authenticated, the child routes will be rendered
-    //sAuthenticated is false, the component returns a Navigate component with the to prop set to "/" and replace
-    //if dont use loading, it will not wait for authenticated or not, it will directly navigate to /
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+            setIsLoading(false);
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     if (isLoading) {
-        return null;
+        return null; 
     }
+
     if (isAuthenticated) {
         return <Outlet />;
     }
+
     return <Navigate to="/" replace />;
 };
 

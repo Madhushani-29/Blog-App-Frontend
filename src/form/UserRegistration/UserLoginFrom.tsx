@@ -67,8 +67,8 @@ const UserLoginForm = ({
                     {buttonText}
                 </Button>
                 <div className="flex">
-                <p>If still not registered,</p>
-                <Link to="/register" className="pl-2 font-bold text-teal-700">Register</Link>
+                    <p>If still not registered,</p>
+                    <Link to="/register" className="pl-2 font-bold text-teal-700">Register</Link>
                 </div>
             </form>
         </Form>

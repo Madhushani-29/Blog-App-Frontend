@@ -8,14 +8,20 @@ import {
 import { Link } from "react-router-dom";
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
+import { auth } from "@/config/firebase-config";
 
-const UsernameMenu = () => {
+type Props={
+    logout:()=>void;
+}
+
+const UsernameMenu = ({logout}:Props) => {
+    const user = auth.currentUser;
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center px-3 font-bold hover:text-teal-700 gap-2">
                 <CircleUserRound className="text-teal-700" />
-                Email
+                {user?.email}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem>
@@ -38,7 +44,7 @@ const UsernameMenu = () => {
                 <Separator />
                 <DropdownMenuItem>
                     <Button
-                        onClick={() => console.log("Log out")}
+                        onClick={logout}
                         className="flex flex-1 font-bold bg-teal-700"
                     >
                         Log Out

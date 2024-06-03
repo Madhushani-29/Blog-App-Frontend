@@ -88,7 +88,7 @@ const UserRegistrationForm = ({
                         <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input {...field} type="password" className="bg-white" />
+                                <Input {...field} className="bg-white" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

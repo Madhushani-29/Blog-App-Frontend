@@ -3,6 +3,9 @@ import Layout from "./layouts/Layout";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProtectedRoutes from "./auth/ProtectedRoutes";
+import BlogPage from "./pages/BlogPage";
+import AuthCallbackPage from "./pages/AuthCallbackPage";
 
 const AppRoutes = () => {
     return (
@@ -10,7 +13,17 @@ const AppRoutes = () => {
             <Route path="/" element={<Layout showHero><HomePage /></Layout>} />
             <Route path="/login" element={<Layout><LoginPage /></Layout>} />
             <Route path="/register" element={<Layout ><RegisterPage /></Layout>} />
-            {/*<Route path="/auth-callback" element={<AuthCallbackPage />} />*/}
+            <Route element={<ProtectedRoutes />}>
+                <Route
+                    path="/blogs"
+                    element={
+                        <Layout>
+                            <BlogPage />
+                        </Layout>
+                    }
+                />
+            </Route>
+            <Route path="/auth-callback" element={<AuthCallbackPage />} />
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
     );

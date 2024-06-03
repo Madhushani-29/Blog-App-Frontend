@@ -1,16 +1,27 @@
 import { auth } from "@/config/firebase-config";
 import UserRegistrationForm, { UserRegisterFormData } from "@/form/UserRegistration/UserRegistrationForm"
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const handleRegistration = async (userRegistrationData: UserRegisterFormData) => {
     try {
       await createUserWithEmailAndPassword(auth, userRegistrationData.email, userRegistrationData.password);
-      // after successfully register the auth created in firebase config hold the data of current user
       toast.success("User registered successfully !");
       const user = auth.currentUser;
-      console.log(user);
+      if (user) {
+        const userData = {
+          firstName: userRegistrationData.firstName,
+          lastName: userRegistrationData.lastName,
+          email: userRegistrationData.email,
+          uid: user.uid,
+        };
+        const queryString = new URLSearchParams(userData).toString();
+        navigate(`/auth-callback?${queryString}`);
+      }
     }
     catch (error) {
       if (error instanceof Error) {

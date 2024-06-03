@@ -1,27 +1,29 @@
 import { useCreateMyUser } from '@/api/MyUserApi';
-import { useAuth0 } from '@auth0/auth0-react'
+import { auth } from '@/config/firebase-config';
 import { useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AuthCallbackPage = () => {
     const navigate = useNavigate();
-    const { user } = useAuth0();
+    const user = auth.currentUser;
     const { createUser } = useCreateMyUser();
     const hasCreatedUser = useRef(false);
+    const location = useLocation();
 
     useEffect(() => {
-        //useref use to stop rerender when state change and
-        //hasCreatedUser use to make sure only once call the create function
-        if (user?.sub && user?.email && !hasCreatedUser.current) {
-            createUser({ auth0ID: user.sub, email: user.email });
-            hasCreatedUser.current = true;
-        }
-        navigate("/");
-    }, [createUser, navigate, user]);
+        const params = new URLSearchParams(location.search);
+        const firstName = params.get("firstName") || "";
+        const lastName = params.get("lastName") || "";
+        const email = params.get("email") || "";
+        const uid = params.get("uid") || "";
+        createUser({ firstName, lastName, email, uid });
+        hasCreatedUser.current = true;
+        navigate("/login");
+    }, [createUser, navigate, user, location.search]);
 
     return (
         <>Loading...</>
     )
 }
 
-export default AuthCallbackPage
+export default AuthCallbackPage;

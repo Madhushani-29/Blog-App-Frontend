@@ -4,14 +4,19 @@ import { Button } from './ui/button';
 import { Separator } from './ui/separator';
 import MobileNavLinks from './MobileNavLinks';
 import { useNavigate } from 'react-router-dom';
+import { auth } from "@/config/firebase-config";
 
 const MobileNav = () => {
     const navigate = useNavigate();
-
-    const isAuthenticated = false;
+    const user = auth.currentUser;
 
     const navigateLoginPage = () => {
         navigate("/login");
+    }
+
+    const logout=()=>{
+        auth.signOut();
+        navigateLoginPage();
     }
 
     return (
@@ -21,10 +26,10 @@ const MobileNav = () => {
             </SheetTrigger>
             <SheetContent className='space-y-4'>
                 <SheetTitle>
-                    {isAuthenticated ? (
+                    {user ? (
                         <span className="flex items-center font-bold gap-2">
                             <CircleUserRound className="text-teal-700" />
-                            Email
+                            {user.email}
                         </span>
                     ) : (
                         <span> Welcome to MernEats.com!</span>
@@ -32,8 +37,8 @@ const MobileNav = () => {
                 </SheetTitle>
                 <Separator />
                 <SheetDescription className='flex flex-col gap-4'>
-                    {isAuthenticated ? (
-                        <MobileNavLinks />
+                    {user ? (
+                        <MobileNavLinks logout={logout}/>
                     ) : (
                         <Button
                             onClick={navigateLoginPage}
