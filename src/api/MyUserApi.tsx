@@ -1,7 +1,7 @@
 import { auth } from "@/config/firebase-config";
 import { useMutation } from "react-query";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 /*export const useGetMyUser = () => {
     const { getAccessTokenSilently } = useAuth0();
@@ -41,7 +41,7 @@ type CreateUserRequest = {
     firstName: string;
     lastName: string;
     email: string;
-    uid: string;
+    imageUrl:string;
 };
 
 export const useCreateMyUser = () => {
@@ -52,7 +52,7 @@ export const useCreateMyUser = () => {
         }
 
         const token = await currentUser.getIdToken();
-        const response = await fetch(`${API_BASE_URL}/api/my/user`, {
+        const response = await fetch(`${VITE_API_BASE_URL}/api/my/user`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,

@@ -17,7 +17,6 @@ const RegisterPage = () => {
           firstName: userRegistrationData.firstName,
           lastName: userRegistrationData.lastName,
           email: userRegistrationData.email,
-          uid: user.uid,
         };
         const queryString = new URLSearchParams(userData).toString();
         navigate(`/auth-callback?${queryString}`);
