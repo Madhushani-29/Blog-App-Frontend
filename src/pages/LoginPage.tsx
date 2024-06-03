@@ -1,5 +1,5 @@
 import { auth } from "@/config/firebase-config";
-import UserLoginForm, { UserLoginFormData } from "@/form/UserRegistration/UserLoginFrom"
+import UserLoginForm, { UserLoginFormData } from "@/form/UserManagementForms/UserLoginFrom"
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";

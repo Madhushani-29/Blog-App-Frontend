@@ -1,18 +1,23 @@
 import { auth } from "@/config/firebase-config";
-import { useMutation } from "react-query";
+import { User } from "@/types";
+import { useMutation, useQuery } from "react-query";
+import { toast } from "sonner";
 
 const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-/*export const useGetMyUser = () => {
-    const { getAccessTokenSilently } = useAuth0();
+export const useGetMyUser = () => {
 
     const getMyUserRequest = async (): Promise<User> => {
-        const accessToken = await getAccessTokenSilently();
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+            throw new Error("No authenticated user found");
+        }
+        const token = await currentUser.getIdToken();
 
-        const response = await fetch(`${API_BASE_URL}/api/my/user`, {
+        const response = await fetch(`${VITE_API_BASE_URL}/api/my/user`, {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });
@@ -35,13 +40,13 @@ const VITE_API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     }
 
     return { currentUser, isLoading };
-};*/
+};
 
 type CreateUserRequest = {
     firstName: string;
     lastName: string;
     email: string;
-    imageUrl:string;
+    imageUrl: string;
 };
 
 export const useCreateMyUser = () => {
@@ -81,23 +86,24 @@ export const useCreateMyUser = () => {
     };
 };
 
-/*type UpdateMyUserRequest = {
-    name: string;
-    addressLine1: string;
-    city: string;
-    country: string;
-};*/
+type UpdateMyUserRequest = {
+    firstName: string;
+    lastName: string;
+    imageUrl?: string;
+};
 
-/*export const useUpdateMyUser = () => {
-    const { getAccessTokenSilently } = useAuth0();
-
+export const useUpdateMyUser = () => {
     const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
-        const accessToken = await getAccessTokenSilently();
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+            throw new Error("No authenticated user found");
+        }
+        const token = await currentUser.getIdToken();
 
-        const response = await fetch(`${API_BASE_URL}/api/my/user`, {
+        const response = await fetch(`${VITE_API_BASE_URL}/api/my/user`, {
             method: "PUT",
             headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
@@ -128,4 +134,4 @@ export const useCreateMyUser = () => {
     }
 
     return { updateUser, isLoading };
-};*/
+};

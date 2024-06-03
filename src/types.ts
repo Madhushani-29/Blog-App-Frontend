@@ -1,8 +1,7 @@
 export type User = {
-    _id: string;
-    email: string;
-    name: string;
-    addressLine1: string;
-    city: string;
-    country: string;
-  };
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  imageUrl:string;
+};

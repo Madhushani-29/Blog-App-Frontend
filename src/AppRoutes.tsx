@@ -6,6 +6,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ProtectedRoutes from "./auth/ProtectedRoutes";
 import BlogPage from "./pages/BlogPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
+import MyProfilePage from "./pages/MyProfilePage";
 
 const AppRoutes = () => {
     return (
@@ -16,11 +17,11 @@ const AppRoutes = () => {
             <Route element={<ProtectedRoutes />}>
                 <Route
                     path="/blogs"
-                    element={
-                        <Layout>
-                            <BlogPage />
-                        </Layout>
-                    }
+                    element={<Layout><BlogPage /></Layout>}
+                />
+                <Route
+                    path="/user-profile"
+                    element={<Layout><MyProfilePage /></Layout>}
                 />
             </Route>
             <Route path="/auth-callback" element={<AuthCallbackPage />} />

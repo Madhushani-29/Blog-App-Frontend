@@ -1,5 +1,5 @@
 import { auth } from "@/config/firebase-config";
-import UserRegistrationForm, { UserRegisterFormData } from "@/form/UserRegistration/UserRegistrationForm"
+import UserRegistrationForm, { UserRegisterFormData } from "@/form/UserManagementForms/UserRegistrationForm"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
