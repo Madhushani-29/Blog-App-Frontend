@@ -86,14 +86,10 @@ export const useCreateMyUser = () => {
     };
 };
 
-type UpdateMyUserRequest = {
-    firstName: string;
-    lastName: string;
-    imageUrl?: string;
-};
 
 export const useUpdateMyUser = () => {
-    const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
+    const updateMyUserRequest = async (formData: FormData) => {
+        console.log("Data recieveed API", formData);
         const currentUser = auth.currentUser;
         if (!currentUser) {
             throw new Error("No authenticated user found");
@@ -104,9 +100,8 @@ export const useUpdateMyUser = () => {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
             },
-            body: JSON.stringify(formData),
+            body: formData,
         });
 
         if (!response.ok) {

@@ -21,7 +21,7 @@ const HomePage = () => {
                 <h1 className="text-5xl font-bold tracking-tight text-teal-700">Wanderlust Chronicles: Global Adventure Stories</h1>
                 <span className="text-xl px-10">Dive into Wanderlust Diaries for captivating global adventure stories, travel tips, and destination guides. Join us as we explore unique cultures, breathtaking landscapes, and unforgettable journeys around the world. Your adventure begins here!</span>
                 <Button
-                    className="bg-teal-500 hover:bg-teal-400 text-white font-bold py-2 px-4 border-b-4 border-teal-700 hover:border-teal-500 rounded md:mx-80 mx-20  mb-10 h-14 text-2xl"
+                    className="bg-teal-500 hover:bg-teal-400 text-white font-bold py-2 px-4 border-b-4 border-teal-700 hover:border-teal-500 rounded md:mx-60 mx-20  mb-10 h-14 md:text-2xl"
                     onClick={navigateNextPage}>
                     {user ? "Read Blogs" : "Join Us"}
                 </Button>

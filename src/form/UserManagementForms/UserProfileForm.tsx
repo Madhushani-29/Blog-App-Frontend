@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import ImageSection from "@/form/UserManagementForms/ImageSelection";
 import { User } from "@/types";
 import { useEffect } from "react";
 import LoadingButton from "@/components/LoadingButton";
@@ -31,7 +30,7 @@ const userProfileFormSchema = z.object({
 export type UserProfileFormData = z.infer<typeof userProfileFormSchema>;
 
 type Props = {
-    onSave: (userProfileData: UserProfileFormData) => void;
+    onSave: (formData: FormData) => void;
     currentUser: User;
     isLoading: boolean;
 };
@@ -46,10 +45,25 @@ const UserProfileForm = ({ onSave, currentUser, isLoading }: Props) => {
         form.reset(currentUser);
     }, [currentUser, form]);
 
+    const onSubmit = (formDataJson: UserProfileFormData) => {
+        const formData = new FormData();
+        formData.append("firstName", formDataJson.firstName);
+        
+        formData.append("lastName", formDataJson.lastName);
+        formData.append("email", formDataJson.email);
+        if (formDataJson.imageFile) {
+            formData.append("imageFile", formDataJson.imageFile);
+        }
+        //const formDataJsonNew = Object.fromEntries(formData.entries());
+        onSave(formData);
+        //return formDataJsonNew;
+    };
+
+
     return (
         <Form {...form}>
             <form
-                onSubmit={form.handleSubmit(onSave)}
+                onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4 bg-gray-50 rounded-lg md:p-10"
             >
                 <div className="md:flex gap-4">
@@ -97,7 +111,27 @@ const UserProfileForm = ({ onSave, currentUser, isLoading }: Props) => {
                         </FormItem>
                     )}
                 />
-                <ImageSection />
+                <FormField
+                    control={form.control}
+                    name="imageFile"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <Input
+                                    className="bg-white"
+                                    type="file"
+                                    accept=".jpg, .jpeg, .png"
+                                    onChange={(event) =>
+                                        field.onChange(
+                                            event.target.files ? event.target.files[0] : null
+                                        )
+                                    }
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 {isLoading ? (
                     <LoadingButton />
                 ) : (
