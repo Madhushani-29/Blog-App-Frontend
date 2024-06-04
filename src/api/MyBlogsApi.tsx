@@ -92,8 +92,9 @@ type UpdateBlogRequest = {
 
 export const useUpdateBlog = () => {
     const updateBlogRequest = async (updateBlogData: UpdateBlogRequest) => {
-        console.log("user Bloh data: ", updateBlogData)
-        /*const currentUser = auth.currentUser;
+        const { id, formData } = updateBlogData;
+
+        const currentUser = auth.currentUser;
         if (!currentUser) {
             throw new Error("No authenticated user found");
         }
@@ -109,7 +110,7 @@ export const useUpdateBlog = () => {
 
         if (!response.ok) {
             throw new Error("Failed to update blog");
-        }*/
+        }
     };
 
     const { mutateAsync: updateBlog, isLoading, isSuccess, error, reset } = useMutation(updateBlogRequest);

@@ -87,11 +87,17 @@ const BlogForm = ({ onSave, isLoading, currentBlog, title }: Props) => {
             </FormItem>
           )}
         />
+        {currentBlog?.imageUrl && (
+          <div className="bg-teal-100 rounded-lg md:w-1/3">
+            <img className="object-scale-down h-48 w-96 ..." src={currentBlog?.imageUrl} alt="{currentBlog?.title}" />
+          </div>
+        )}
         <FormField
           control={form.control}
           name="imageFile"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>Image</FormLabel>
               <FormControl>
                 <Input
                   className="bg-white"
@@ -111,7 +117,7 @@ const BlogForm = ({ onSave, isLoading, currentBlog, title }: Props) => {
         {isLoading ? (
           <LoadingButton />
         ) : (
-          <Button type="submit" className="bg-orange-500">
+          <Button type="submit" className="bg-teal-700">
             Submit
           </Button>
         )}
