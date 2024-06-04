@@ -48,15 +48,12 @@ const UserProfileForm = ({ onSave, currentUser, isLoading }: Props) => {
     const onSubmit = (formDataJson: UserProfileFormData) => {
         const formData = new FormData();
         formData.append("firstName", formDataJson.firstName);
-        
         formData.append("lastName", formDataJson.lastName);
         formData.append("email", formDataJson.email);
         if (formDataJson.imageFile) {
             formData.append("imageFile", formDataJson.imageFile);
         }
-        //const formDataJsonNew = Object.fromEntries(formData.entries());
         onSave(formData);
-        //return formDataJsonNew;
     };
 
 

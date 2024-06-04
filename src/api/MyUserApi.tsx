@@ -89,7 +89,6 @@ export const useCreateMyUser = () => {
 
 export const useUpdateMyUser = () => {
     const updateMyUserRequest = async (formData: FormData) => {
-        console.log("Data recieveed API", formData);
         const currentUser = auth.currentUser;
         if (!currentUser) {
             throw new Error("No authenticated user found");

@@ -7,6 +7,9 @@ import ProtectedRoutes from "./auth/ProtectedRoutes";
 import BlogPage from "./pages/BlogPage";
 import AuthCallbackPage from "./pages/AuthCallbackPage";
 import MyProfilePage from "./pages/MyProfilePage";
+import MyBlogsPage from "./pages/MyBlogsPage";
+import CreateBlogPage from "./pages/CreateBlogPage";
+import UpdateBlogPage from "./pages/UpdateBlogPage";
 
 const AppRoutes = () => {
     return (
@@ -22,6 +25,18 @@ const AppRoutes = () => {
                 <Route
                     path="/user-profile"
                     element={<Layout><MyProfilePage /></Layout>}
+                />
+                <Route
+                    path="/my-blogs"
+                    element={<Layout><MyBlogsPage /></Layout>}
+                />
+                <Route
+                    path="/create-blog"
+                    element={<Layout><CreateBlogPage /></Layout>}
+                />
+                <Route
+                    path="/update-blog/:id"
+                    element={<Layout><UpdateBlogPage /></Layout>}
                 />
             </Route>
             <Route path="/auth-callback" element={<AuthCallbackPage />} />

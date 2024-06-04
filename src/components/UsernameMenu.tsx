@@ -10,11 +10,11 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import { auth } from "@/config/firebase-config";
 
-type Props={
-    logout:()=>void;
+type Props = {
+    logout: () => void;
 }
 
-const UsernameMenu = ({logout}:Props) => {
+const UsernameMenu = ({ logout }: Props) => {
     const user = auth.currentUser;
 
     return (
@@ -31,8 +31,8 @@ const UsernameMenu = ({logout}:Props) => {
                 </DropdownMenuItem>
                 <Separator />
                 <DropdownMenuItem>
-                    <Link to="/my-posts" className="font-bold hover:text-teal-700">
-                        My Posts
+                    <Link to="/my-blogs" className="font-bold hover:text-teal-700">
+                        My Blogs
                     </Link>
                 </DropdownMenuItem>
                 <Separator />
