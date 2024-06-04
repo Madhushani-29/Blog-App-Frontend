@@ -8,7 +8,21 @@ export type User = {
 
 export type Blog = {
   _id: string;
-  user:string;
+  user: string;
+  title: string;
+  content: string;
+  imageUrl: string;
+};
+
+export type PopulatedBlog = {
+  _id: string;
+  user: {
+    email:string;
+    _id: string;
+    firstName: string;
+    lastName: string;
+    imageUrl: string;
+  };
   title: string;
   content: string;
   imageUrl: string;

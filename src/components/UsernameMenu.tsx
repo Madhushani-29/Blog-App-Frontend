@@ -31,6 +31,12 @@ const UsernameMenu = ({ logout }: Props) => {
                 </DropdownMenuItem>
                 <Separator />
                 <DropdownMenuItem>
+                    <Link to="/blogs" className="font-bold hover:text-teal-700">
+                        Read Blogs
+                    </Link>
+                </DropdownMenuItem>
+                <Separator />
+                <DropdownMenuItem>
                     <Link to="/my-blogs" className="font-bold hover:text-teal-700">
                         My Blogs
                     </Link>

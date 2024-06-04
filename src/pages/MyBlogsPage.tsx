@@ -29,6 +29,7 @@ const MyBlogsPage = () => {
 
       {fetchingLoading || deleteLoading ?
         <>Loading</> :
+        
         blogs?.map((blog: Blog) => {
           return (
             <div id={blog._id} className="bg-teal-100 p-10 rounded-lg md:flex gap-20 mb-10">

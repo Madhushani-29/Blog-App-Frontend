@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-type Props={
-    logout:()=>void;
+type Props = {
+    logout: () => void;
 }
 
-const MobileNavLinks = ({logout}:Props) => {
+const MobileNavLinks = ({ logout }: Props) => {
     return (
         <>
             <Link
@@ -12,6 +12,9 @@ const MobileNavLinks = ({logout}:Props) => {
                 className="flex bg-white items-center font-bold hover:text-teal-700"
             >
                 User Profile
+            </Link>
+            <Link to="/my-blogs" className="font-bold hover:text-teal-700">
+                Read Blogs
             </Link>
             <Link
                 to="/my-blogs"

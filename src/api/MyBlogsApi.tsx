@@ -12,7 +12,6 @@ export const useCreateBlog = () => {
             throw new Error("No authenticated user found");
         }
         const token = await currentUser.getIdToken();
-        console.log(token);
 
         const response = await fetch(`${VITE_API_BASE_URL}/api/my/blogs`, {
             method: "POST",
@@ -128,7 +127,6 @@ export const useUpdateBlog = () => {
 
 export const useDeleteBlog = () => {
     const deleteBlogRequest = async (id: string) => {
-        console.log("ID", id);
         const currentUser = auth.currentUser;
         if (!currentUser) {
             throw new Error("No authenticated user found");
