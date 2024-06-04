@@ -3,9 +3,8 @@ import BlogForm from "@/form/BlogForms/BlogForm"
 
 const CreateBlogPage = () => {
   const { isLoading, createBlog } = useCreateBlog();
-
   return (
-    <BlogForm title="Create Blog" onSave={createBlog} isLoading={isLoading}  />
+    <BlogForm title="Create Blog" onSave={createBlog} isLoading={isLoading} />
   )
 }
 

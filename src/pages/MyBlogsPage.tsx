@@ -1,15 +1,12 @@
-import { useGetMyBlogs } from "@/api/MyBlogsApi";
+import { useDeleteBlog, useGetMyBlogs } from "@/api/MyBlogsApi";
 import { Button } from "@/components/ui/button"
 import { Blog } from "@/types";
 import { useNavigate } from "react-router-dom"
 
 const MyBlogsPage = () => {
-  const { isLoading, blogs } = useGetMyBlogs();
+  const { isLoading: fetchingLoading, blogs } = useGetMyBlogs();
   const navigate = useNavigate();
-
-  const deleteBlog = () => {
-    console.log("delete")
-  }
+  const { isLoading: deleteLoading, deleteBlog } = useDeleteBlog();
 
   const updateBlog = (blog: Blog) => {
     navigate(`/update-blog/${blog._id}`, { state: blog });
@@ -30,7 +27,7 @@ const MyBlogsPage = () => {
         </div>
       </div>
 
-      {isLoading ?
+      {fetchingLoading || deleteLoading ?
         <>Loading</> :
         blogs?.map((blog: Blog) => {
           return (
@@ -47,11 +44,16 @@ const MyBlogsPage = () => {
               <div className="w-full h-full">
                 <p className="font-sans ... pt-12">{blog.content}</p>
                 <div className="md:flex gap-10 mr-10">
-                  <div className="w-5/6 h-12">
-                  </div>
-                  <div className="flex w-1/6 h-12">
-                    <Button className="mr-3 bg-blue-800" onClick={() => updateBlog(blog)}>Update</Button>
-                    <Button className="bg-red-600" onClick={deleteBlog}>Delete</Button>
+                  <div className="md:flex pt-5 lg:ml-[70%]">
+                    <Button className="bg-blue-800 mr-3" onClick={() => updateBlog(blog)}>Update</Button>
+                    <Button
+                      className="bg-red-600 "
+                      onClick={() => {
+                        deleteBlog(blog._id);
+                        window.location.reload();
+                      }}>
+                      Delete
+                    </Button>
                   </div>
                 </div>
               </div>

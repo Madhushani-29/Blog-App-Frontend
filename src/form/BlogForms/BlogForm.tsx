@@ -8,6 +8,7 @@ import { Blog } from "@/types";
 import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   title: z.string({ required_error: "Title name is required" }),
@@ -29,9 +30,10 @@ type Props = {
 }
 
 const BlogForm = ({ onSave, isLoading, currentBlog, title }: Props) => {
+  const navigate = useNavigate();
+
   const form = useForm<BlogFormData>({
     resolver: zodResolver(formSchema),
-    //defaultValues: currentBlog ? { ...currentBlog } : {}
     defaultValues: {}
   });
 
@@ -39,14 +41,21 @@ const BlogForm = ({ onSave, isLoading, currentBlog, title }: Props) => {
     form.reset(currentBlog);
   }, [currentBlog, form]);
 
-  const onSubmit = (formDataJson: BlogFormData) => {
+  const onSubmit = async (formDataJson: BlogFormData) => {
     const formData = new FormData();
     formData.append("title", formDataJson.title);
     formData.append("content", formDataJson.content);
     if (formDataJson.imageFile) {
       formData.append(`imageFile`, formDataJson.imageFile);
     }
-    onSave(formData);
+    try {
+      await onSave(formData);
+      setTimeout(() => {
+        navigate("/my-blogs");
+      }, 3000);
+    } catch (error) {
+      console.error("Error saving blog:", error);
+    }
   }
 
   return (
@@ -81,7 +90,7 @@ const BlogForm = ({ onSave, isLoading, currentBlog, title }: Props) => {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <Textarea {...field} className="bg-white resize" />
+                <Textarea {...field} className="bg-white resize h-60" />
               </FormControl>
               <FormMessage />
             </FormItem>

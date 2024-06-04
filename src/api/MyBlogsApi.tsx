@@ -93,7 +93,6 @@ type UpdateBlogRequest = {
 export const useUpdateBlog = () => {
     const updateBlogRequest = async (updateBlogData: UpdateBlogRequest) => {
         const { id, formData } = updateBlogData;
-
         const currentUser = auth.currentUser;
         if (!currentUser) {
             throw new Error("No authenticated user found");
@@ -125,5 +124,40 @@ export const useUpdateBlog = () => {
     }
 
     return { updateBlog, isLoading };
+};
+
+export const useDeleteBlog = () => {
+    const deleteBlogRequest = async (id: string) => {
+        console.log("ID", id);
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+            throw new Error("No authenticated user found");
+        }
+        const token = await currentUser.getIdToken();
+
+        const response = await fetch(`${VITE_API_BASE_URL}/api/my/blogs/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to delete blog");
+        }
+    };
+
+    const { mutateAsync: deleteBlog, isLoading, isSuccess, error, reset } = useMutation(deleteBlogRequest);
+
+    if (isSuccess) {
+        toast.success("Blog deleted!");
+    }
+
+    if (error) {
+        toast.error(error.toString());
+        reset();
+    }
+
+    return { deleteBlog, isLoading };
 };
 
