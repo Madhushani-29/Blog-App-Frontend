@@ -13,7 +13,7 @@ const MobileNavLinks = ({ logout }: Props) => {
             >
                 User Profile
             </Link>
-            <Link to="/my-blogs" className="font-bold hover:text-teal-700">
+            <Link to="/blogs" className="font-bold hover:text-teal-700">
                 Read Blogs
             </Link>
             <Link

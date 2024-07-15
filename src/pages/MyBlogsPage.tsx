@@ -1,10 +1,11 @@
 import { useDeleteBlog, useGetMyBlogs } from "@/api/MyBlogsApi";
 import { Button } from "@/components/ui/button"
 import { Blog } from "@/types";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 
 const MyBlogsPage = () => {
-  const { isLoading: fetchingLoading, blogs } = useGetMyBlogs();
+  const { isLoading: fetchingLoading, blogs: data } = useGetMyBlogs();
   const navigate = useNavigate();
   const { isLoading: deleteLoading, deleteBlog } = useDeleteBlog();
 
@@ -15,6 +16,10 @@ const MyBlogsPage = () => {
   const navigateNewBlogs = () => {
     navigate("/create-blog");
   }
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <>
@@ -29,8 +34,8 @@ const MyBlogsPage = () => {
 
       {fetchingLoading || deleteLoading ?
         <>Loading</> :
-        
-        blogs?.map((blog: Blog) => {
+
+        data && Array.isArray(data) && data.length > 0  && (data.map((blog: Blog) => {
           return (
             <div id={blog._id} className="bg-teal-100 p-10 rounded-lg md:flex gap-20 mb-10">
               <figure className="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
@@ -60,7 +65,8 @@ const MyBlogsPage = () => {
               </div>
             </div>
           )
-        })
+        }))
+          
       }
     </>
   )
