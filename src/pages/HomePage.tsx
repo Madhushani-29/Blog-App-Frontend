@@ -37,7 +37,6 @@ const HomePage = () => {
                     </span>
                     <img src={appDownload} alt="Playstore apple store" />
                 </div>
-                <p style={{color:"red"}}>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
             </div>
         </div>
     )
